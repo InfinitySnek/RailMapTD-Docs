@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RailMapTD Help</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17212b;
+      --muted: #5f6b76;
+      --line: #d8dee5;
+      --panel: #f5f7f9;
+      --accent: #2f8f3a;
+      --accent-dark: #1f6b29;
+      --warn: #8a5b00;
+      --danger: #a52714;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--white);
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff 0%, #f6faf7 100%);
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 20px;
+      align-items: center;
+      padding: 36px 0 32px;
+    }
+
+    .app-mark {
+      width: 88px;
+      height: 88px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      object-fit: cover;
+      background: #fff;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-top: 44px;
+      padding-top: 6px;
+      font-size: 1.65rem;
+      border-top: 1px solid var(--line);
+    }
+
+    h3 {
+      margin-top: 26px;
+      font-size: 1.15rem;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    a {
+      color: var(--accent-dark);
+    }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #eef2f4;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 0.95em;
+    }
+
+    main {
+      padding: 24px 0 64px;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .meta {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: #fff;
+    }
+
+    .toc {
+      margin: 20px 0 30px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      padding: 0;
+      border: 0;
+      font-size: 1.2rem;
+    }
+
+    .toc ul,
+    .checklist,
+    .plain-list {
+      margin: 8px 0 0;
+      padding-left: 22px;
+    }
+
+    .toc li,
+    .checklist li,
+    .plain-list li {
+      margin: 7px 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .card,
+    .note,
+    .warning {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    .note {
+      border-left: 4px solid var(--accent);
+      background: #f6fbf7;
+    }
+
+    .warning {
+      border-left: 4px solid var(--warn);
+      background: #fff9ed;
+    }
+
+    .danger {
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.96rem;
+    }
+
+    th,
+    td {
+      text-align: left;
+      vertical-align: top;
+      padding: 10px;
+      border: 1px solid var(--line);
+    }
+
+    th {
+      background: var(--panel);
+    }
+
+    .kbd {
+      display: inline-block;
+      min-width: 1.8em;
+      padding: 1px 6px;
+      border: 1px solid #b7c0c8;
+      border-bottom-width: 2px;
+      border-radius: 4px;
+      background: #fff;
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.9em;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      padding: 20px 0 36px;
+      font-size: 0.94rem;
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        grid-template-columns: 64px 1fr;
+        gap: 14px;
+      }
+
+      .app-mark {
+        width: 64px;
+        height: 64px;
+        border-radius: 14px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      body {
+        font-size: 11pt;
+      }
+
+      header {
+        background: #fff;
+      }
+
+      .wrap {
+        width: 100%;
+      }
+
+      .toc,
+      .card,
+      .note,
+      .warning {
+        break-inside: avoid;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <img class="app-mark" src="../App/src/main/res/drawable-nodpi/app_icon.png" alt="RailMapTD app-icoon">
+      <div>
+        <h1>RailMapTD Help</h1>
+        <p class="subtitle">Lokale gebruikershandleiding voor inspectiefoto's met spoorinformatie, GPS, kaartlagen, tags en export.</p>
+        <div class="meta">
+          <span class="pill">Android telefoon en tablet</span>
+          <span class="pill">Wear OS companion</span>
+          <span class="pill">Android en Wear OS</span>
+          <span class="pill">Bijgewerkt: 2 november 2026</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="toc" aria-labelledby="inhoud">
+      <h2 id="inhoud">Inhoud</h2>
+      <ul>
+        <li><a href="#doel">Doel van de app</a></li>
+        <li><a href="#voorbereiding">Voorbereiding</a></li>
+        <li><a href="#token">ProRail token instellen</a></li>
+        <li><a href="#projecten">Projecten beheren</a></li>
+        <li><a href="#dagelijks">Dagelijkse werkwijze in het veld</a></li>
+        <li><a href="#schermen">Uitleg per scherm</a></li>
+        <li><a href="#foto">Foto's, tekst en bestandsnamen</a></li>
+        <li><a href="#kaart">Kaart en luchtfoto</a></li>
+        <li><a href="#bronnen">Bronvermelding</a></li>
+        <li><a href="#veiligheid">Veiligheid en dichtstbijzijnde uitgang</a></li>
+        <li><a href="#wear">Wear OS</a></li>
+        <li><a href="#export">Export</a></li>
+        <li><a href="#privacy">Privacy en gegevensgebruik</a></li>
+        <li><a href="#problemen">Probleemoplossing</a></li>
+      </ul>
+    </section>
+
+    <section id="doel">
+      <h2>Doel Van De App</h2>
+      <p>RailMapTD helpt bij het vastleggen van inspectiefoto's langs het spoor. De app combineert de foto met de actuele locatie, ProRail-referentiegegevens, spoornaam, kilometrering, kijkrichting, veiligheidscontext en gekozen tags.</p>
+      <p>Het resultaat is een projectexport met gelabelde foto's, originele foto's zonder tekst en een metadata-bestand. Daardoor is achteraf beter te bepalen waar een foto is gemaakt, in welke richting is gekeken en welke objecten relevant waren.</p>
+
+      <div class="note">
+        <strong>Belangrijk:</strong> RailMapTD ondersteunt de inspectiewerkwijze, maar vervangt geen veiligheidsinstructies, werkplekbeveiliging of lokale procedures. Controleer in het veld altijd of de voorgestelde informatie logisch is.
+      </div>
+    </section>
+
+    <section id="voorbereiding">
+      <h2>Voorbereiding</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Benodigdheden</h3>
+          <ul class="plain-list">
+            <li>Android telefoon of tablet met camera en locatievoorziening.</li>
+            <li>Internetverbinding bij het aanmaken of verversen van een project.</li>
+            <li>Een geldige ProRail token wanneer hosted services worden gebruikt.</li>
+            <li>Een projectnaam en een of meer geocodes.</li>
+            <li>Optioneel: gekoppeld Wear OS horloge.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Aanbevolen veldcheck</h3>
+          <ul class="plain-list">
+            <li>Open de app buiten of op een plek met goed GPS-bereik.</li>
+            <li>Wacht tot GPS en nauwkeurigheid zichtbaar zijn.</li>
+            <li>Controleer spoornaam, kilometrering en kaartlagen.</li>
+            <li>Maak een testfoto en controleer de export.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="token">
+      <h2>ProRail Token Instellen</h2>
+      <p>Voor openbare kaartlagen is geen aparte token nodig. Voor hosted services, zoals hosted overwegen of toegangslocaties, kan wel een ProRail token nodig zijn. De app kan deze token zelf aanvragen wanneer de gebruiker een ProRail/ArcGIS gebruikersnaam en wachtwoord invult.</p>
+
+      <p>RailMapTD bewaart alleen de gebruikersnaam, de token en het moment waarop de token is aangemaakt. Het wachtwoord wordt niet opgeslagen. De token wordt maximaal voor 14 dagen aangevraagd, maar de app markeert hem na 13 dagen als verlopen zodat er altijd marge is.</p>
+
+      <h3>Token automatisch aanvragen</h3>
+      <ol class="checklist">
+        <li>Open in RailMapTD het actieve project.</li>
+        <li>Ga naar <code>Project</code>, open <code>Instellingen en debug tonen</code> en kies <code>Projectdata</code>.</li>
+        <li>Kies <code>ProRail hosted token instellen</code>.</li>
+        <li>Vul de gebruikersnaam en het wachtwoord in.</li>
+        <li>Tik op <code>Token ophalen en opslaan</code>.</li>
+        <li>Ververs daarna de projectdata zodat hosted lagen opnieuw worden opgehaald.</li>
+      </ol>
+
+      <h3>Handmatige fallback</h3>
+      <ol class="checklist">
+        <li>Open in een browser: <a href="https://maps.prorail.nl/portal/sharing/rest/generateToken">https://maps.prorail.nl/portal/sharing/rest/generateToken</a>.</li>
+        <li>Log in met de juiste ProRail-accountgegevens.</li>
+        <li>Gebruik bij voorkeur de referer-methode wanneer daarom wordt gevraagd.</li>
+        <li>Kopieer de referer-URL uit de app-instellingen. De app toont hiervoor een los tekstveld met <code>https://maps.prorail.nl/arcgis/rest</code>.</li>
+        <li>Genereer de token en kopieer de volledige tokenwaarde.</li>
+        <li>Plak de token in RailMapTD bij de ProRail hosted instellingen.</li>
+        <li>Ververs daarna de projectdata.</li>
+      </ol>
+
+      <div class="warning">
+        <strong>Let op:</strong> tokens verlopen. Als hosted data niet meer wordt opgehaald of de app aangeeft dat de token ouder is dan 13 dagen, vraag dan een nieuwe token aan en ververs het project opnieuw.
+      </div>
+    </section>
+
+    <section id="actueel">
+      <h2>Projecten zoeken en Scope importeren</h2>
+      <p>Kies Nieuw project en zoek op geocode of baanvak. Selecteer de gewenste geocodes of importeer ScopeTD JSON. Je kunt ook een ProRail Exporter QR scannen, zowel voor een nieuw als bestaand project. Houd bij een overdracht met meerdere QR-beelden de camera gericht tot alle delen zijn ontvangen. Ververs daarna projectdata en controleer het gebied en de scope.</p>
+      <p>Voor iPhone en iPad is er een <a href="../Help.md">afzonderlijke handleiding</a>; de bediening verschilt per platform.</p>
+    </section>
+
+    <section id="projecten">
+      <h2>Projecten Beheren</h2>
+      <p>Na het openen van de app kom je eerst in het projectoverzicht. Daar kun je een bestaand project openen of een nieuw project starten.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Actie</th>
+            <th>Werking</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nieuw project</td>
+            <td>Vul een duidelijke projectnaam in en voeg een of meer geocodes toe. Meerdere geocodes kunnen met komma's, puntkomma's of spaties worden ingevoerd.</td>
+          </tr>
+          <tr>
+            <td>Project uit Scope JSON</td>
+            <td>Maak direct een project uit een ScopeTD JSON-bestand. De geocodes worden uit de scope-items gehaald. Ververs daarna projectdata om spoorlagen op te halen.</td>
+          </tr>
+          <tr>
+            <td>Project openen</td>
+            <td>Opent de bestaande lokale projectdata, foto's, instellingen en metadata.</td>
+          </tr>
+          <tr>
+            <td>Project verversen</td>
+            <td>Haalt de ProRail lagen opnieuw op. Gebruik dit na tokenwijzigingen, extra geocodes of wanneer nieuwe lagen zijn toegevoegd aan de app.</td>
+          </tr>
+          <tr>
+            <td>Project verwijderen</td>
+            <td>Vraagt eerst om bevestiging. Bij verwijderen verdwijnt het project inclusief lokale foto's en metadata.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="dagelijks">
+      <h2>Dagelijkse Werkwijze In Het Veld</h2>
+      <ol class="checklist">
+        <li>Open RailMapTD en kies het juiste project.</li>
+        <li>Controleer of de GPS-status actueel is en of de nauwkeurigheid acceptabel is.</li>
+        <li>Controleer geocode, kilometrering, spoornaam en baanvak.</li>
+        <li>Gebruik de kaart wanneer je de locatie visueel wilt bevestigen.</li>
+        <li>Kies bij spoorcorrectie het juiste spoor wanneer meerdere sporen dichtbij liggen.</li>
+        <li>Kies de kijkrichting: automatisch, KM oplopend of KM aflopend.</li>
+        <li>Selecteer relevante tags, zoals ES-las, railspoel, wissel of actief beveiligde overweg.</li>
+        <li>Vul eventueel vrije tags of een opmerking in.</li>
+        <li>Tik op <span class="kbd">Foto maken</span>. De app probeert eerst de actuele locatie te verversen voordat de camera opent.</li>
+        <li>Controleer foto's in het aparte fotoscherm als je veel foto's hebt gemaakt.</li>
+        <li>Exporteer het project als ZIP wanneer de veldronde klaar is.</li>
+      </ol>
+    </section>
+
+    <section id="schermen">
+      <h2>Uitleg Per Scherm</h2>
+
+      <h3>Project</h3>
+      <p>Toont het actieve project, projectacties, instellingen en technische gegevens. Instellingen en debugdata zijn bewust achter een menu geplaatst, zodat de gewone veldworkflow rustig blijft.</p>
+
+      <h3>Locatie</h3>
+      <p>Toont de huidige GPS-positie, nauwkeurigheid, provider, geocode, kilometrering, spoornaam, baanvak en dichtstbijzijnde uitgang. Als de GPS tijdelijk niet ververst, gebruikt de app bij een foto als fallback de laatst bekende bruikbare data en toont daarbij een melding.</p>
+
+      <h3>Camera</h3>
+      <p>Hier kies je tags, spoorcorrectie, kijkrichting, vrije tags en opmerkingen. Vanaf dit scherm maak je de foto. De definitieve metadata wordt zo laat mogelijk bepaald, zodat locatie en kijkrichting zo actueel mogelijk zijn.</p>
+
+      <h3>Kaart</h3>
+      <p>Toont luchtfoto, spoorlagen, kilometerlint, hectometerpunten, objecttags, uitgangen en GPS-positie. De fullscreen kaart ondersteunt pannen, pinch-to-zoom en een lagenmenu.</p>
+
+      <h3>Foto's</h3>
+      <p>Toont gemaakte foto's in een apart overzicht. Dit voorkomt dat het hoofdscherm erg lang wordt bij grote datasets. Vanuit dit scherm kun je foto's bekijken, delen of verwijderen.</p>
+
+      <h3>Export</h3>
+      <p>Maakt een ZIP-bestand met foto's en metadata. Bij grote projecten kan dit even duren; de app toont exportstatus zodat duidelijk is dat er gewerkt wordt.</p>
+    </section>
+
+    <section id="foto">
+      <h2>Foto's, Tekst En Bestandsnamen</h2>
+      <p>De app slaat standaard twee varianten op: een gelabelde foto in <code>Tagged</code> en een originele foto zonder tekst in <code>originals</code>. De gelabelde foto gebruikt standaard tekst onder de afbeelding, zodat belangrijke delen van de foto niet worden afgedekt.</p>
+
+      <h3>Tekst Op Foto</h3>
+      <p>In de instellingen kan de gebruiker bepalen welke velden op de foto komen. De standaardselectie bevat de belangrijkste opnamegegevens.</p>
+      <ul class="plain-list">
+        <li>Datum en tijd</li>
+        <li>Projectnaam</li>
+        <li>GPS-positie</li>
+        <li>Geocode</li>
+        <li>Baanvak</li>
+        <li>Kilometrering</li>
+        <li>Spoornaam</li>
+        <li>Kijkrichting</li>
+      </ul>
+
+      <h3>Vormgeving Van De Tekst</h3>
+      <p>De tekstpositie, tekstgrootte, tekstkleur en achtergrond zijn instelbaar. De standaardinstelling is rustig en goed leesbaar: tekst onder de foto, normale grootte, donkere tekst en witte achtergrond.</p>
+
+      <h3>Bestandsnamen</h3>
+      <p>De bestandsnaam is instelbaar op dezelfde manier als de fototekst. Standaard gebruikt de app: <code>geocode_kilometrering_spoornaam_datum</code>. Dit houdt de naam kort genoeg en toch herkenbaar.</p>
+
+      <h3>Camera Rotatie</h3>
+      <p>Als een toestel foto's structureel verkeerd gedraaid opslaat, kan een rotatiecorrectie worden ingesteld. Laat deze op automatisch staan zolang foto's goed worden opgeslagen.</p>
+    </section>
+
+    <section id="kaart">
+      <h2>Kaart En Luchtfoto</h2>
+      <p>De kaart gebruikt online luchtfoto's als ondergrond en lokale projectlagen als overlay. Luchtfoto's worden niet opgeslagen in het project, zodat projecten beheersbaar blijven qua opslagruimte.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Laag</th>
+            <th>Doel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Luchtfoto</td>
+            <td>Online Georizon WMTS-luchtfoto als visuele ondergrond.</td>
+          </tr>
+          <tr>
+            <td>Spoorhartlijn</td>
+            <td>Toont spoorligging en wordt gebruikt voor afstand en spoornaamlogica.</td>
+          </tr>
+          <tr>
+            <td>Kilometerlint</td>
+            <td>Toont kilometrering en helpt bij orientatie langs het spoor.</td>
+          </tr>
+          <tr>
+            <td>Hectometerpunten</td>
+            <td>Toont hectometerwaarden als getal, bijvoorbeeld <code>30.8</code>.</td>
+          </tr>
+          <tr>
+            <td>Tags</td>
+            <td>Toont onder andere ES-lassen, railspoelen, wissels en actief beveiligde overwegen.</td>
+          </tr>
+          <tr>
+            <td>Uitgangen</td>
+            <td>Toont toegangspoorten en actief beveiligde overwegen die als uitgang kunnen dienen.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Gebruik pinch-to-zoom om in en uit te zoomen. Gebruik het lagenmenu om lagen tijdelijk aan of uit te zetten.</p>
+    </section>
+
+    <section id="bronnen">
+      <h2>Bronvermelding</h2>
+      <p>RailMapTD gebruikt openbare ProRail kaart- en spoorobjectdata met bronvermelding: <code>Bron: ProRail</code>. Deze bronvermelding wordt ook op de kaart getoond.</p>
+      <p>Voor de kaartondergrond gebruikt de app de BRT Achtergrondkaart van Kadaster/PDOK onder CC BY 4.0. Voor de luchtfoto gebruikt de app ProRail/Georizon. Hosted lagen waarvoor een token nodig is kunnen aanvullende toegangsvoorwaarden hebben.</p>
+      <p>Controleer bij nieuwe databronnen altijd de metadata van de betreffende service, vooral <code>Copyright Text</code> of <code>accessInformation</code>.</p>
+    </section>
+
+    <section id="veiligheid">
+      <h2>Veiligheid En Dichtstbijzijnde Uitgang</h2>
+      <p>De app toont de dichtstbijzijnde uitgang op basis van toegangspoorten en actief beveiligde overwegen. Bij overwegen wordt waar mogelijk de straat of locatie getoond. Bij toegangspoorten worden technische codes zoals PUIC niet in de normale gebruikersweergave getoond.</p>
+
+      <h3>Ligging Ten Opzichte Van De Gebruiker</h3>
+      <p>De app toont afstand en richting vanaf de huidige locatie. Dat helpt om te bepalen waar de uitgang ligt ten opzichte van de gebruiker.</p>
+
+      <h3>Niet Oversteken Van Sporen</h3>
+      <p>Voor toegangspoorten gebruikt de app een conservatieve controle: als de rechte lijn van de gebruiker naar de poort een spoorhartlijn kruist, wordt die poort niet voorgesteld als geldige dichtstbijzijnde uitgang.</p>
+
+      <div class="warning">
+        <strong>Belangrijk:</strong> dit is geen volledige looprouteplanner. Blijf altijd de geldende veiligheidsprocedures volgen.
+      </div>
+    </section>
+
+    <section id="wear">
+      <h2>Wear OS</h2>
+      <p>De Wear OS app is een companion-weergave. De telefoon blijft leidend voor projectkeuze, foto's, kaart, tags en instellingen. Het horloge toont live de belangrijkste veldstatus.</p>
+
+      <h3>Wat Wordt Getoond?</h3>
+      <ul class="plain-list">
+        <li>Project en geocode</li>
+        <li>GPS-nauwkeurigheid</li>
+        <li>Spoornaam en kilometrering</li>
+        <li>Kijkrichting</li>
+        <li>Dichtstbijzijnde uitgang</li>
+        <li>Aantal gemaakte foto's</li>
+        <li>Laatste statusmelding</li>
+      </ul>
+
+      <h3>Haptische Signalen</h3>
+      <p>Haptische meldingen staan standaard uit. In het haptiekmenu kan per itemtype worden ingesteld of het horloge trilt, welk signaal wordt gebruikt en binnen welke range het signaal actief is.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Itemtype</th>
+            <th>Voorbeeldgebruik</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hectometerpunt</td>
+            <td>Korte melding bij naderen van een hectometerpunt.</td>
+          </tr>
+          <tr>
+            <td>ES-las</td>
+            <td>Melding wanneer een ES-las binnen de ingestelde range ligt.</td>
+          </tr>
+          <tr>
+            <td>Railspoel</td>
+            <td>Melding bij railspoelen in de buurt.</td>
+          </tr>
+          <tr>
+            <td>Wissel</td>
+            <td>Melding wanneer de gebruiker in de buurt van een wissel staat.</td>
+          </tr>
+          <tr>
+            <td>Toegangspoort</td>
+            <td>Melding bij toegangspoorten binnen de gekozen range.</td>
+          </tr>
+          <tr>
+            <td>Actief beveiligde overweg</td>
+            <td>Melding bij actief beveiligde overwegen.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>De lettergrootte van de watch-app is instelbaar via de telefoon-app. Op ondersteunde horloges kan ook een tegel beschikbaar zijn voor snelle statusweergave.</p>
+    </section>
+
+    <section id="export">
+      <h2>Export</h2>
+      <p>Een projectexport is een ZIP-bestand dat gebruikt kan worden voor verwerking, archivering of controle achteraf.</p>
+
+      <h3>Inhoud Van De ZIP</h3>
+      <pre><code>metadata.csv
+Tagged/
+  gelabelde foto's met metadata-tekst
+originals/
+  originele foto's zonder tekst</code></pre>
+
+      <h3>Metadata</h3>
+      <p><code>metadata.csv</code> bevat onder andere projectnaam, fotonaam, datum/tijd, GPS, nauwkeurigheid, geocode, kilometrering, baanvak, spoornaam, kijkrichting, kompasgraden, spoorbearing, tags, scope-id, scope-activiteiten, scope-objecten en opmerking.</p>
+
+      <h3>ScopeTD</h3>
+      <p>ScopeTD JSON kan als nieuw project worden geopend of in een bestaand project worden geimporteerd. De app bepaalt actieve scope-items op basis van geocode, spoornaam en kilometrering. Actieve scope-items kunnen bij de foto worden geselecteerd en komen terug in de foto-details en CSV-export.</p>
+
+      <h3>Kijkrichting In De Export</h3>
+      <p><code>kijkrichting</code> is de menselijke waarde: <code>KM oplopend</code>, <code>KM aflopend</code> of haaks/onbekend wanneer dat niet betrouwbaar genoeg is. <code>kompas_graden</code> blijft beschikbaar als numerieke waarde voor verwerking in bijvoorbeeld AutoCAD.</p>
+    </section>
+
+    <section id="privacy">
+      <h2>Privacy en gegevensgebruik</h2>
+      <p>Projecten, foto's en metadata worden lokaal opgeslagen. ProRail-aanvragen bevatten onder meer de gekozen geocodes; kaartdiensten ontvangen aanvragen voor het getoonde gebied. Bij ingeschakelde treinnadering stuurt de app actuele coördinaten naar NS Virtual Train. Delen geeft foto's en metadata door aan de gekozen app of ontvanger.</p>
+      <p>Android staat systeemback-ups toe. Verwijderen uit de app verwijdert geen eerder gedeelde bestanden of bestaande reservekopieën. Zie <a href="RailMapTD-privacy.md">Privacy en gegevensgebruik</a> voor de volledige technische toelichting.</p>
+      <p>Bij gelijke fotobestandsnamen voegt de app een volgnummer toe. De ZIP gebruikt de laatste metadata per fotobestandsnaam en neemt metadata op voor beschikbare foto's. Controleer de export voordat je het project verwijdert.</p>
+    </section>
+
+    <section id="problemen">
+      <h2>Probleemoplossing</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Probleem</th>
+            <th>Wat Kun Je Doen?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GPS duurt lang of is onnauwkeurig</td>
+            <td>Ga naar buiten, wacht op een betere fix en controleer de nauwkeurigheid. Bij foto maken probeert de app eerst een actuele locatie te krijgen. Lukt dat niet, dan gebruikt de app de laatst bekende data met een waarschuwing.</td>
+          </tr>
+          <tr>
+            <td>Projectdata mist nieuwe lagen</td>
+            <td>Open het projectmenu en ververs de projectdata. Dit is nodig wanneer de app nieuwe lagen ondersteunt of wanneer geocodes zijn toegevoegd.</td>
+          </tr>
+          <tr>
+            <td>Scope-items worden niet getoond</td>
+            <td>Controleer of de ScopeTD JSON is geimporteerd, of de projectdata is ververst voor de juiste geocodes, en of de huidige geocode, spoornaam en kilometrering binnen het scopebereik vallen.</td>
+          </tr>
+          <tr>
+            <td>Hosted data wordt niet opgehaald</td>
+            <td>Controleer of de ProRail token nog geldig is. Vraag zo nodig automatisch een nieuwe token aan via de app of gebruik de tokenpagina als handmatige fallback. Ververs daarna het project.</td>
+          </tr>
+          <tr>
+            <td>Luchtfoto is niet zichtbaar</td>
+            <td>Controleer internetverbinding en of de luchtfotolaag aan staat in het lagenmenu.</td>
+          </tr>
+          <tr>
+            <td>Spoornaam lijkt niet te kloppen</td>
+            <td>Controleer de kaart en kies indien nodig een spoorcorrectie of vul een eigen spoornaam in.</td>
+          </tr>
+          <tr>
+            <td>Kijkrichting klopt niet</td>
+            <td>Gebruik handmatig <code>KM oplopend</code> of <code>KM aflopend</code>, vooral op toestellen zonder kompassensor of bij twijfel.</td>
+          </tr>
+          <tr>
+            <td>Foto staat gedraaid</td>
+            <td>Gebruik de camera-rotatiecorrectie in de instellingen als een toestel foto's structureel verkeerd opslaat.</td>
+          </tr>
+          <tr>
+            <td>Export lijkt lang te duren</td>
+            <td>Bij veel foto's kan het maken van de ZIP even duren. Wacht tot de exportstatus aangeeft dat het bestand klaar is.</td>
+          </tr>
+          <tr>
+            <td>Watch toont Open app</td>
+            <td>Open de telefoon-app, kies een project en zorg dat telefoon en horloge gekoppeld zijn. De watch-app toont pas live data nadat de telefoon status publiceert.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      RailMapTD lokale helpdocumentatie. Dit bestand staat los van de app en kan lokaal worden geopend in een browser.
+    </div>
+  </footer>
+</body>
+</html>
